@@ -18,17 +18,14 @@ from django.contrib import admin
 from myproject.views import hellodjango
 from myproject.views import hello
 from rest_framework import routers
-# from myproject import views
-from snippets import views
+import myproject
+from snippets import views as snippets_views
+from mongo_obj import views as mongo_views
 
 router = routers.DefaultRouter()
-# router.register(r'users', views.UserViewSet)
-# router.register(r'groups', views.GroupViewSet)
+router.register(r'users', myproject.views.UserViewSet)
+router.register(r'groups', myproject.views.GroupViewSet)
 
-# urlpatterns = patterns('',
-#     url(r'^', include(router.urls)),
-#     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
-# )
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -36,6 +33,7 @@ urlpatterns = [
     url(r'^hello/$', hello),
     url(r'^service/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^snippets/$', views.snippet_list),
-    url(r'^snippets/(?P<pk>[0-9]+)/$', views.snippet_detail),
+    url(r'^snippets/$', snippets_views.snippet_list),
+    url(r'^snippets/(?P<pk>[0-9]+)/$', snippets_views.snippet_detail),
+    url(r'^mongo/(?P<id>[0-9]+)/$', mongo_views.mongo_object),
 ]
