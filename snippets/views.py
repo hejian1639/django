@@ -1,15 +1,8 @@
-from django.contrib.auth.models import User
-from rest_framework import permissions
-from rest_framework import renderers
-from rest_framework import viewsets
-from rest_framework.decorators import detail_route, api_view
-from rest_framework.response import Response
+from rest_framework.decorators import api_view
 from snippets.models import Snippet
-from snippets.permissions import IsOwnerOrReadOnly
-from snippets.serializers import SnippetSerializer, UserSerializer
+from snippets.serializers import SnippetSerializer
 from django.http import HttpResponse
 from rest_framework.renderers import JSONRenderer
-from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 
 
