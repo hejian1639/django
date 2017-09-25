@@ -25,7 +25,7 @@ def hellodjango(request):
 
 def hello(request):
     context = {}
-    context['hello'] = 'Hello World!'
+    context['hello'] = 'Hello Django!'
     return render(request, 'hello.html', context)
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -36,3 +36,7 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
+def helloParams(request):
+    p1 = request.GET.get('p1')
+    p2 = request.GET.get('p2')
+    return HttpResponse("p1 = " + p1 + "; p2 = " + p2)

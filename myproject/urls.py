@@ -15,8 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from myproject.views import hellodjango
-from myproject.views import hello
+from myproject.views import hellodjango, hello, helloParams
 from rest_framework import routers
 import myproject
 from snippets import views as snippets_views
@@ -28,8 +27,10 @@ router.register(r'groups', myproject.views.GroupViewSet)
 
 
 urlpatterns = [
+    url(r'^$', hello),
     url(r'^admin/', admin.site.urls),
     url(r'^hellodjango/$', hellodjango),
+    url(r'^plist/$', helloParams),
     url(r'^hello/$', hello),
     url(r'^service/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
