@@ -1,4 +1,3 @@
-from rest_framework.decorators import detail_route, api_view
 from django.http import HttpResponse
 from rest_framework.renderers import JSONRenderer
 from pymongo import MongoClient
@@ -16,7 +15,17 @@ class JSONResponse(HttpResponse):
 
 
 
-@api_view(['GET', 'PUT', 'DELETE'])
+def mongo_list(request):
+    if request.method == 'GET':
+        ret = []
+        for doc in collection.find():
+            print doc
+            del doc["_id"]
+            ret.append(doc)
+
+        return HttpResponse(json.dumps(ret))
+
+
 def mongo_object(request, id):
     object = collection.find_one({"id":id})
     if(object == None):
